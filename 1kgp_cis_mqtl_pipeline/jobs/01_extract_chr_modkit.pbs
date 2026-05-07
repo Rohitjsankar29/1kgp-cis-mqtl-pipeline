@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+#PBS -N mqtl_modkit
+#PBS -P cy94
+#PBS -q normal
+#PBS -l ncpus=8
+#PBS -l mem=32GB
+#PBS -l walltime=06:00:00
+#PBS -l jobfs=50GB
+#PBS -l storage=scratch/cy94+gdata/cy94
+#PBS -l wd
+#PBS -j oe
+set -euo pipefail
+
+source config/gadi.env
+module load samtools/1.22
+module load htslib
+module load python3/3.12.1
+
+CHROM=${CHROM:-chr22}
+MANIFEST=${MANIFEST:-config/bam_manifest.tsv}
+OUTDIR=${OUTDIR:-$GDATA_ROOT/methylation/bedmethyl_chr}
+ROW=${PBS_ARRAY_INDEX:-1}
+
+bash scripts/methylation/01_extract_chr_modkit.sh "$MANIFEST" "$ROW" "$CHROM" "$REFERENCE" "$OUTDIR" "$PBS_NCPUS" 5
