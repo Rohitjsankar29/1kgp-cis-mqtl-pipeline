@@ -1,6 +1,6 @@
 # 1KGP cis-mQTL prioritisation pilot pipeline
 
-This repository builds a storage-aware CpG-centric cis-mQTL framework.
+This repository builds a CpG-centric cis-mQTL framework.
 
 Workflow:
 1. Build 1KGP ONT BAM manifest
