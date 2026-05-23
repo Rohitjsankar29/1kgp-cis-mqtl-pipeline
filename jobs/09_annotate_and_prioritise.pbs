@@ -1,0 +1,40 @@
+#!/bin/bash
+#PBS -N annotate_prioritise
+#PBS -P cy94
+#PBS -q normal
+#PBS -l ncpus=4
+#PBS -l mem=32GB
+#PBS -l walltime=04:00:00
+#PBS -l storage=scratch/cy94+gdata/cy94
+#PBS -l wd
+#PBS -j oe
+
+set -euo pipefail
+source "${PIPELINE_DIR}/config/gadi.env"
+
+module load python3/3.12.1
+
+CHR="${CHR:-chr22}"
+RESULTS="${GDATA_ROOT}/results/${CHR}"
+ANNOT="${GDATA_ROOT}/annotations"
+
+mkdir -p "${RESULTS}/prioritisation"
+
+python "${PIPELINE_DIR}/scripts/sv/09_integrate_sv_mqtl.py" \
+  --features "${RESULTS}/prioritisation/${CHR}.feature_matrix.tsv" \
+  --sv-vcf "${GDATA_ROOT}/variants/sv/per_sample/${CHR}.sv.vcf.gz" \
+  --cpg-bed "${RESULTS}/matrix/${CHR}.methylation_Mval.bed.gz" \
+  --out "${RESULTS}/prioritisation/${CHR}.features.with_sv.tsv" \
+  --cis-window 1000000 \
+  --emit-sv-candidates
+
+python "${PIPELINE_DIR}/scripts/annotation/10_annotate_functional.py" \
+  --features "${RESULTS}/prioritisation/${CHR}.features.with_sv.tsv" \
+  --cpg-bed "${RESULTS}/matrix/${CHR}.methylation_Mval.bed.gz" \
+  --annotation-dir "${ANNOT}" \
+  --out "${RESULTS}/prioritisation/${CHR}.features.annotated.tsv"
+
+python "${PIPELINE_DIR}/scripts/prioritisation/11_score_prioritise_variants.py" \
+  --features "${RESULTS}/prioritisation/${CHR}.features.annotated.tsv" \
+  --out "${RESULTS}/prioritisation/${CHR}.ranked_prioritised_variants.tsv" \
+  --top-per-cpg 20

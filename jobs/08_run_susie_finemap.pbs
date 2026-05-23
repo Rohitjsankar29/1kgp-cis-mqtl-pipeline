@@ -1,0 +1,27 @@
+#!/bin/bash
+#PBS -N susie_mqtl
+#PBS -P cy94
+#PBS -q normal
+#PBS -l ncpus=4
+#PBS -l mem=32GB
+#PBS -l walltime=06:00:00
+#PBS -l storage=scratch/cy94+gdata/cy94
+#PBS -l wd
+#PBS -j oe
+
+set -euo pipefail
+source "${PIPELINE_DIR}/config/gadi.env"
+
+module load R/4.3.1
+
+CHR="${CHR:-chr22}"
+RESULTS="${GDATA_ROOT}/results/${CHR}"
+mkdir -p "${RESULTS}/finemapping"
+
+Rscript "${PIPELINE_DIR}/scripts/finemapping/08_run_susie_finemap.R" \
+  --qtl "${RESULTS}/tensorqtl/${CHR}.nominal.tsv" \
+  --geno "${RESULTS}/genotypes/${CHR}.dosage.tsv" \
+  --pheno "${RESULTS}/matrix/${CHR}.phenotypes.tsv" \
+  --out "${RESULTS}/finemapping/${CHR}.susie.tsv" \
+  --L 10 \
+  --min-pip 0.01
