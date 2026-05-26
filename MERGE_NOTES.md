@@ -1,6 +1,7 @@
 # Merge notes
 
-This repository has been merged so that guide/Cursor-agent scripts are used for actual NCI execution, while the dissertation-specific scripts remain for downstream prioritisation.
+
+
 
 ## What changed
 
