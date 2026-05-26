@@ -1,0 +1,200 @@
+    processing phenotype 551109/551233    * WARNING: excluding 2792 monomorphic variants
+    processing phenotype 551110/551233    * WARNING: excluding 2782 monomorphic variants
+    processing phenotype 551111/551233    * WARNING: excluding 2781 monomorphic variants
+    processing phenotype 551112/551233    * WARNING: excluding 2781 monomorphic variants
+    processing phenotype 551113/551233    * WARNING: excluding 2781 monomorphic variants
+    processing phenotype 551114/551233    * WARNING: excluding 2781 monomorphic variants
+    processing phenotype 551115/551233    * WARNING: excluding 2780 monomorphic variants
+    processing phenotype 551116/551233    * WARNING: excluding 2780 monomorphic variants
+    processing phenotype 551117/551233    * WARNING: excluding 2779 monomorphic variants
+    processing phenotype 551118/551233    * WARNING: excluding 2778 monomorphic variants
+    processing phenotype 551119/551233    * WARNING: excluding 2778 monomorphic variants
+    processing phenotype 551120/551233    * WARNING: excluding 2778 monomorphic variants
+/scratch/cy94/rs4477/micromamba/envs/mqtl_tensorqtl/lib/python3.10/site-packages/tensorqtl/core.py:340: RuntimeWarning: divide by zero encountered in divide
+  tstat2 = dof * r2 / (1 - r2)
+/scratch/cy94/rs4477/micromamba/envs/mqtl_tensorqtl/lib/python3.10/site-packages/tensorqtl/core.py:341: RuntimeWarning: invalid value encountered in sqrt
+  return get_t_pval(np.sqrt(tstat2), dof, log=logp)
+WARNING: scipy.optimize.newton failed to converge (running scipy.optimize.minimize)
+/scratch/cy94/rs4477/micromamba/envs/mqtl_tensorqtl/lib/python3.10/site-packages/tensorqtl/core.py:355: RuntimeWarning: divide by zero encountered in log
+  return (1.0-shape1)*np.sum(np.log(x)) + (1.0-shape2)*np.sum(np.log(1.0-x)) + len(x)*logbeta
+    processing phenotype 551121/551233    * WARNING: excluding 2778 monomorphic variants
+    processing phenotype 551122/551233    * WARNING: excluding 2776 monomorphic variants
+    processing phenotype 551123/551233    * WARNING: excluding 2774 monomorphic variants
+    processing phenotype 551124/551233    * WARNING: excluding 2772 monomorphic variants
+    processing phenotype 551125/551233    * WARNING: excluding 2771 monomorphic variants
+    processing phenotype 551126/551233    * WARNING: excluding 2770 monomorphic variants
+    processing phenotype 551127/551233    * WARNING: excluding 2770 monomorphic variants
+    processing phenotype 551128/551233    * WARNING: excluding 2770 monomorphic variants
+    processing phenotype 551129/551233    * WARNING: excluding 2767 monomorphic variants
+    processing phenotype 551130/551233    * WARNING: excluding 2764 monomorphic variants
+    processing phenotype 551131/551233    * WARNING: excluding 2764 monomorphic variants
+    processing phenotype 551132/551233    * WARNING: excluding 2761 monomorphic variants
+    processing phenotype 551133/551233    * WARNING: excluding 2761 monomorphic variants
+    processing phenotype 551134/551233    * WARNING: excluding 2760 monomorphic variants
+    processing phenotype 551135/551233    * WARNING: excluding 2759 monomorphic variants
+    processing phenotype 551136/551233    * WARNING: excluding 2757 monomorphic variants
+    processing phenotype 551137/551233    * WARNING: excluding 2757 monomorphic variants
+    processing phenotype 551138/551233    * WARNING: excluding 2756 monomorphic variants
+/scratch/cy94/rs4477/micromamba/envs/mqtl_tensorqtl/lib/python3.10/site-packages/tensorqtl/core.py:349: RuntimeWarning: invalid value encountered in scalar divide
+  return mean * (mean * (1.0-mean) / var - 1.0)
+WARNING: scipy.optimize.newton failed to converge (running scipy.optimize.minimize)
+/scratch/cy94/rs4477/micromamba/envs/mqtl_tensorqtl/lib/python3.10/site-packages/tensorqtl/core.py:349: RuntimeWarning: divide by zero encountered in scalar divide
+  return mean * (mean * (1.0-mean) / var - 1.0)
+    processing phenotype 551139/551233    * WARNING: excluding 2752 monomorphic variants
+    processing phenotype 551140/551233    * WARNING: excluding 2751 monomorphic variants
+    processing phenotype 551141/551233    * WARNING: excluding 2751 monomorphic variants
+    processing phenotype 551142/551233    * WARNING: excluding 2751 monomorphic variants
+    processing phenotype 551143/551233    * WARNING: excluding 2751 monomorphic variants
+    processing phenotype 551144/551233    * WARNING: excluding 2751 monomorphic variants
+    processing phenotype 551145/551233    * WARNING: excluding 2751 monomorphic variants
+    processing phenotype 551146/551233    * WARNING: excluding 2751 monomorphic variants
+    processing phenotype 551147/551233    * WARNING: excluding 2748 monomorphic variants
+    processing phenotype 551148/551233    * WARNING: excluding 2748 monomorphic variants
+    processing phenotype 551149/551233    * WARNING: excluding 2740 monomorphic variants
+    processing phenotype 551150/551233    * WARNING: excluding 2740 monomorphic variants
+    processing phenotype 551151/551233    * WARNING: excluding 2740 monomorphic variants
+    processing phenotype 551152/551233    * WARNING: excluding 2740 monomorphic variants
+    processing phenotype 551153/551233    * WARNING: excluding 2740 monomorphic variants
+    processing phenotype 551154/551233    * WARNING: excluding 2740 monomorphic variants
+    processing phenotype 551155/551233    * WARNING: excluding 2739 monomorphic variants
+    processing phenotype 551156/551233    * WARNING: excluding 2738 monomorphic variants
+    processing phenotype 551157/551233    * WARNING: excluding 2738 monomorphic variants
+    processing phenotype 551158/551233    * WARNING: excluding 2738 monomorphic variants
+    processing phenotype 551159/551233    * WARNING: excluding 2736 monomorphic variants
+    processing phenotype 551160/551233    * WARNING: excluding 2736 monomorphic variants
+    processing phenotype 551161/551233    * WARNING: excluding 2735 monomorphic variants
+    processing phenotype 551162/551233    * WARNING: excluding 2733 monomorphic variants
+    processing phenotype 551163/551233    * WARNING: excluding 2733 monomorphic variants
+    processing phenotype 551164/551233    * WARNING: excluding 2733 monomorphic variants
+    processing phenotype 551165/551233    * WARNING: excluding 2733 monomorphic variants
+    processing phenotype 551166/551233    * WARNING: excluding 2733 monomorphic variants
+    processing phenotype 551167/551233    * WARNING: excluding 2733 monomorphic variants
+    processing phenotype 551168/551233    * WARNING: excluding 2733 monomorphic variants
+    processing phenotype 551169/551233    * WARNING: excluding 2731 monomorphic variants
+    processing phenotype 551170/551233    * WARNING: excluding 2730 monomorphic variants
+    processing phenotype 551171/551233    * WARNING: excluding 2728 monomorphic variants
+    processing phenotype 551172/551233    * WARNING: excluding 2728 monomorphic variants
+    processing phenotype 551173/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551174/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551175/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551176/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551177/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551178/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551179/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551180/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551181/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551182/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551183/551233    * WARNING: excluding 2725 monomorphic variants
+/scratch/cy94/rs4477/micromamba/envs/mqtl_tensorqtl/lib/python3.10/site-packages/tensorqtl/core.py:349: RuntimeWarning: divide by zero encountered in scalar divide
+  return mean * (mean * (1.0-mean) / var - 1.0)
+    processing phenotype 551184/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551185/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551186/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551187/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551188/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551189/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551190/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551191/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551192/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551193/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551194/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551195/551233    * WARNING: excluding 2725 monomorphic variants
+/scratch/cy94/rs4477/micromamba/envs/mqtl_tensorqtl/lib/python3.10/site-packages/tensorqtl/core.py:349: RuntimeWarning: invalid value encountered in scalar divide
+  return mean * (mean * (1.0-mean) / var - 1.0)
+WARNING: scipy.optimize.newton failed to converge (running scipy.optimize.minimize)
+/scratch/cy94/rs4477/micromamba/envs/mqtl_tensorqtl/lib/python3.10/site-packages/tensorqtl/core.py:349: RuntimeWarning: divide by zero encountered in scalar divide
+  return mean * (mean * (1.0-mean) / var - 1.0)
+    processing phenotype 551196/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551197/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551198/551233    * WARNING: excluding 2725 monomorphic variants
+    processing phenotype 551199/551233    * WARNING: excluding 2725 monomorphic variants
+/scratch/cy94/rs4477/micromamba/envs/mqtl_tensorqtl/lib/python3.10/site-packages/tensorqtl/cis.py:570: RuntimeWarning: divide by zero encountered in scalar divide
+  tstat2 = dof * r2_nominal / (1 - r2_nominal)
+/scratch/cy94/rs4477/micromamba/envs/mqtl_tensorqtl/lib/python3.10/site-packages/tensorqtl/core.py:340: RuntimeWarning: divide by zero encountered in scalar divide
+  tstat2 = dof * r2 / (1 - r2)
+/scratch/cy94/rs4477/micromamba/envs/mqtl_tensorqtl/lib/python3.10/site-packages/tensorqtl/core.py:340: RuntimeWarning: divide by zero encountered in divide
+  tstat2 = dof * r2 / (1 - r2)
+/scratch/cy94/rs4477/micromamba/envs/mqtl_tensorqtl/lib/python3.10/site-packages/tensorqtl/core.py:340: RuntimeWarning: invalid value encountered in divide
+  tstat2 = dof * r2 / (1 - r2)
+WARNING: scipy.optimize.newton failed to converge (running scipy.optimize.minimize)
+/scratch/cy94/rs4477/micromamba/envs/mqtl_tensorqtl/lib/python3.10/site-packages/tensorqtl/core.py:341: RuntimeWarning: invalid value encountered in sqrt
+  return get_t_pval(np.sqrt(tstat2), dof, log=logp)
+/scratch/cy94/rs4477/micromamba/envs/mqtl_tensorqtl/lib/python3.10/site-packages/tensorqtl/core.py:355: RuntimeWarning: divide by zero encountered in log
+  return (1.0-shape1)*np.sum(np.log(x)) + (1.0-shape2)*np.sum(np.log(1.0-x)) + len(x)*logbeta
+/scratch/cy94/rs4477/micromamba/envs/mqtl_tensorqtl/lib/python3.10/site-packages/scipy/optimize/_optimize.py:851: RuntimeWarning: invalid value encountered in subtract
+  np.max(np.abs(fsim[0] - fsim[1:])) <= fatol):
+    processing phenotype 551200/551233    * WARNING: excluding 2722 monomorphic variants
+    processing phenotype 551201/551233    * WARNING: excluding 2722 monomorphic variants
+    processing phenotype 551202/551233    * WARNING: excluding 2722 monomorphic variants
+    processing phenotype 551203/551233    * WARNING: excluding 2722 monomorphic variants
+    processing phenotype 551204/551233    * WARNING: excluding 2722 monomorphic variants
+    processing phenotype 551205/551233    * WARNING: excluding 2722 monomorphic variants
+    processing phenotype 551206/551233    * WARNING: excluding 2721 monomorphic variants
+    processing phenotype 551207/551233    * WARNING: excluding 2721 monomorphic variants
+    processing phenotype 551208/551233    * WARNING: excluding 2721 monomorphic variants
+    processing phenotype 551209/551233    * WARNING: excluding 2721 monomorphic variants
+    processing phenotype 551210/551233    * WARNING: excluding 2721 monomorphic variants
+    processing phenotype 551211/551233    * WARNING: excluding 2720 monomorphic variants
+    processing phenotype 551212/551233    * WARNING: excluding 2719 monomorphic variants
+    processing phenotype 551213/551233    * WARNING: excluding 2719 monomorphic variants
+    processing phenotype 551214/551233    * WARNING: excluding 2719 monomorphic variants
+    processing phenotype 551215/551233    * WARNING: excluding 2719 monomorphic variants
+    processing phenotype 551216/551233    * WARNING: excluding 2719 monomorphic variants
+    processing phenotype 551217/551233    * WARNING: excluding 2718 monomorphic variants
+    processing phenotype 551218/551233    * WARNING: excluding 2718 monomorphic variants
+/scratch/cy94/rs4477/micromamba/envs/mqtl_tensorqtl/lib/python3.10/site-packages/tensorqtl/cis.py:571: RuntimeWarning: invalid value encountered in sqrt
+  slope_se = np.abs(slope) / np.sqrt(tstat2)
+/scratch/cy94/rs4477/micromamba/envs/mqtl_tensorqtl/lib/python3.10/site-packages/tensorqtl/core.py:341: RuntimeWarning: invalid value encountered in sqrt
+  return get_t_pval(np.sqrt(tstat2), dof, log=logp)
+/scratch/cy94/rs4477/micromamba/envs/mqtl_tensorqtl/lib/python3.10/site-packages/tensorqtl/core.py:340: RuntimeWarning: divide by zero encountered in divide
+  tstat2 = dof * r2 / (1 - r2)
+WARNING: scipy.optimize.newton failed to converge (running scipy.optimize.minimize)
+/scratch/cy94/rs4477/micromamba/envs/mqtl_tensorqtl/lib/python3.10/site-packages/tensorqtl/core.py:355: RuntimeWarning: divide by zero encountered in log
+  return (1.0-shape1)*np.sum(np.log(x)) + (1.0-shape2)*np.sum(np.log(1.0-x)) + len(x)*logbeta
+    processing phenotype 551219/551233    * WARNING: excluding 2718 monomorphic variants
+    processing phenotype 551220/551233    * WARNING: excluding 2717 monomorphic variants
+    processing phenotype 551221/551233    * WARNING: excluding 2716 monomorphic variants
+    processing phenotype 551222/551233    * WARNING: excluding 2716 monomorphic variants
+    processing phenotype 551223/551233    * WARNING: excluding 2714 monomorphic variants
+    processing phenotype 551224/551233    * WARNING: excluding 2713 monomorphic variants
+    processing phenotype 551225/551233    * WARNING: excluding 2712 monomorphic variants
+    processing phenotype 551226/551233    * WARNING: excluding 2712 monomorphic variants
+    processing phenotype 551227/551233    * WARNING: excluding 2711 monomorphic variants
+    processing phenotype 551228/551233    * WARNING: excluding 2711 monomorphic variants
+    processing phenotype 551229/551233    * WARNING: excluding 2711 monomorphic variants
+    processing phenotype 551230/551233    * WARNING: excluding 2711 monomorphic variants
+    processing phenotype 551231/551233    * WARNING: excluding 2711 monomorphic variants
+    processing phenotype 551232/551233    * WARNING: excluding 2711 monomorphic variants
+    processing phenotype 551233/551233
+    * WARNING: excluding 2709 monomorphic variants
+    * WARNING: excluding 2709 monomorphic variants
+    * WARNING: excluding 2707 monomorphic variants
+    * WARNING: excluding 2707 monomorphic variants
+    * WARNING: excluding 2707 monomorphic variants
+    * WARNING: excluding 2706 monomorphic variants
+    * WARNING: excluding 2704 monomorphic variants
+    * WARNING: excluding 2703 monomorphic variants
+  Time elapsed: 92.40 min
+done.
+/scratch/cy94/rs4477/micromamba/envs/mqtl_tensorqtl/lib/python3.10/site-packages/pandas/core/dtypes/astype.py:133: RuntimeWarning: overflow encountered in cast
+  return arr.astype(dtype, copy=True)
+05:34:49 Permutation pass complete: 551233 CpGs tested
+05:35:07 Permutation results: /g/data/xl04/rs4477/1kgp-cis-mqtl/tensorqtl/chr22_5samples/tiny_test/permutation/chr22.tiny.permutation.txt.gz
+05:35:08   CpGs with valid p-value: 532678
+05:35:08   Min pval_beta: 0
+05:35:08   Median pval_beta: 0.4452
+05:35:08 Done.
+Tiny TensorQTL test finished.
+162137879009560808  30000 -rw-r--r--   1  rs4477   xl04     30716495 May 26 05:35 /g/data/xl04/rs4477/1kgp-cis-mqtl/tensorqtl/chr22_5samples/tiny_test/permutation/chr22.tiny.permutation.txt.gz
+
+======================================================================================
+                  Resource Usage on 2026-05-26 05:35:47:
+   Job Id:             169237025.gadi-pbs
+   Project:            cy94
+   Exit Status:        0
+   Service Units:      12.78
+   NCPUs Requested:    2                   CPU Time Used: 01:32:42        
+   Memory Requested:   16.0GB                Memory Used: 3.84GB          
+   Walltime Requested: 04:00:00            Walltime Used: 01:35:49        
+   JobFS Requested:    100.0MB                JobFS Used: 0B              
+======================================================================================

@@ -1,0 +1,35 @@
+#!/bin/bash
+#PBS -N tqtl_perm5
+#PBS -P cy94
+#PBS -q normal
+#PBS -l ncpus=4
+#PBS -l mem=32GB
+#PBS -l walltime=04:00:00
+#PBS -l storage=scratch/cy94+gdata/xl04
+#PBS -l wd
+#PBS -j oe
+#PBS -o /scratch/cy94/rs4477/1kgp-cis-mqtl/logs/
+
+set -euo pipefail
+
+export MAMBA_EXE=/home/571/rs4477/.local/bin/micromamba
+export MAMBA_ROOT_PREFIX=/scratch/cy94/rs4477/micromamba
+eval "$($MAMBA_EXE shell hook --shell bash --root-prefix $MAMBA_ROOT_PREFIX)"
+micromamba activate mqtl_tensorqtl
+
+cd /scratch/cy94/rs4477/1kgp-cis-mqtl-pipeline
+
+mkdir -p /g/data/xl04/rs4477/1kgp-cis-mqtl/tensorqtl/chr22_5samples/permutation
+
+python scripts/tensorqtl/05_run_tensorqtl_pilot.py \
+  --plink-prefix /g/data/xl04/rs4477/1kgp-cis-mqtl/genotypes/chr22_5samples/chr22.5samples \
+  --phenotype-bed /g/data/xl04/rs4477/1kgp-cis-mqtl/matrix/chr22_5samples_tensorqtl/methylation_Mval.bed.gz \
+  --covariates /g/data/xl04/rs4477/1kgp-cis-mqtl/covariates/chr22_5samples/covariates.tsv \
+  --nominal-out /g/data/xl04/rs4477/1kgp-cis-mqtl/tensorqtl/chr22_5samples/nominal_dummy \
+  --permutation-out /g/data/xl04/rs4477/1kgp-cis-mqtl/tensorqtl/chr22_5samples/permutation/chr22.permutation.txt.gz \
+  --cis-window 1000000 \
+  --n-permutations 100 \
+  --skip-nominal
+
+echo "Permutation-only TensorQTL finished."
+ls -lh /g/data/xl04/rs4477/1kgp-cis-mqtl/tensorqtl/chr22_5samples/permutation

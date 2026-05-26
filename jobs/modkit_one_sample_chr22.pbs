@@ -1,0 +1,66 @@
+#!/bin/bash
+#PBS -N mk_chr22
+#PBS -P cy94
+#PBS -q normal
+#PBS -l ncpus=16
+#PBS -l mem=64GB
+#PBS -l walltime=06:00:00
+#PBS -l jobfs=250GB
+#PBS -l storage=scratch/cy94+gdata/xl04
+#PBS -l wd
+#PBS -j oe
+#PBS -o /scratch/cy94/rs4477/1kgp-cis-mqtl/logs/
+
+set -euo pipefail
+
+source /scratch/cy94/rs4477/1kgp-cis-mqtl-pipeline/config/gadi.env
+
+MANIFEST=/scratch/cy94/rs4477/1kgp-cis-mqtl-pipeline/config/pilot_samples.tsv
+LINE=$(awk -v i="$SAMPLE_INDEX" 'NR==i+1' "$MANIFEST")
+
+SAMPLE=$(echo "$LINE" | cut -f1)
+BAM_URL=$(echo "$LINE" | cut -f2)
+BAM_NAME=$(basename "$BAM_URL")
+
+CHROM=chr22
+BAM_SRC=/g/data/xl04/rs4477/1kgp-cis-mqtl/bams/pilot/$BAM_NAME
+BAI_SRC=${BAM_SRC}.bai
+
+WORK=$PBS_JOBFS/${SAMPLE}_${CHROM}
+OUT=/g/data/xl04/rs4477/1kgp-cis-mqtl/methylation/chr22/${SAMPLE}
+
+mkdir -p "$WORK" "$OUT"
+
+echo "Sample: $SAMPLE"
+echo "Chromosome: $CHROM"
+echo "BAM: $BAM_SRC"
+echo "Output: $OUT"
+
+echo "Copying BAM to jobfs..."
+cp "$BAM_SRC" "$WORK/"
+cp "$BAI_SRC" "$WORK/"
+
+BAM_LOCAL=$WORK/$BAM_NAME
+
+echo "Extracting chr22..."
+samtools view -@ 8 -b "$BAM_LOCAL" "$CHROM" > "$WORK/${SAMPLE}.${CHROM}.bam"
+samtools index "$WORK/${SAMPLE}.${CHROM}.bam"
+
+echo "Running Modkit..."
+$MODKIT pileup \
+  --threads 16 \
+  --ref "$REFERENCE" \
+  --modified-bases 5mC \
+  --cpg \
+  --combine-strands \
+  --bgzf \
+  "$WORK/${SAMPLE}.${CHROM}.bam" \
+  "$OUT/${SAMPLE}.${CHROM}.bedmethyl.gz"
+
+tabix -p bed "$OUT/${SAMPLE}.${CHROM}.bedmethyl.gz"
+
+echo "Deleting full BAM from /g/data to save storage..."
+rm -f "$BAM_SRC" "$BAI_SRC"
+
+echo "Done:"
+ls -lh "$OUT"

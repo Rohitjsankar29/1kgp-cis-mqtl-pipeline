@@ -1,0 +1,25 @@
+#!/bin/bash
+#PBS -N dl_chr22_vcf
+#PBS -P cy94
+#PBS -q copyq
+#PBS -l ncpus=1
+#PBS -l mem=4GB
+#PBS -l walltime=02:00:00
+#PBS -l storage=gdata/xl04+scratch/cy94
+#PBS -l wd
+#PBS -j oe
+#PBS -o /scratch/cy94/rs4477/1kgp-cis-mqtl/logs/
+
+set -euo pipefail
+
+OUT=/g/data/xl04/rs4477/1kgp-cis-mqtl/genotypes/chr22
+mkdir -p "$OUT"
+cd "$OUT"
+
+BASE=https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20220422_3202_phased_SNV_INDEL_SV
+VCF=1kGP_high_coverage_Illumina.chr22.filtered.SNV_INDEL_SV_phased_panel.vcf.gz
+
+wget -c "${BASE}/${VCF}"
+wget -c "${BASE}/${VCF}.tbi"
+
+ls -lh "$OUT"

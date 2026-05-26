@@ -1,0 +1,2 @@
+sample_id	bam_s3_url	basecaller
+HG02479	s3://1000g-ont/PROCESSED_DATA/ALIGNED_TO_HG38/MINIMAP2_ALIGNED_BAMS/HG02479-ONT-hg38-R9-LSK110-dorado050_sup_5mCG_v33.phased.bam	dorado050

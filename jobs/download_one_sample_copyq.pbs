@@ -1,0 +1,33 @@
+#!/bin/bash
+#PBS -N dl_1kgp
+#PBS -P cy94
+#PBS -q copyq
+#PBS -l ncpus=1
+#PBS -l mem=4GB
+#PBS -l walltime=04:00:00
+#PBS -l storage=scratch/cy94+gdata/xl04
+#PBS -l wd
+#PBS -j oe
+#PBS -o /scratch/cy94/rs4477/1kgp-cis-mqtl/logs/
+
+set -euo pipefail
+
+source /scratch/cy94/rs4477/1kgp-cis-mqtl-pipeline/config/gadi.env
+
+MANIFEST=/scratch/cy94/rs4477/1kgp-cis-mqtl-pipeline/config/pilot_samples.tsv
+LINE=$(awk -v i="$SAMPLE_INDEX" 'NR==i+1' "$MANIFEST")
+
+SAMPLE=$(echo "$LINE" | cut -f1)
+BAM_URL=$(echo "$LINE" | cut -f2)
+
+OUT=/g/data/xl04/rs4477/1kgp-cis-mqtl/bams/pilot
+mkdir -p "$OUT"
+
+echo "Downloading sample: $SAMPLE"
+echo "BAM URL: $BAM_URL"
+
+$AWS s3 cp --no-sign-request "$BAM_URL" "$OUT/"
+$AWS s3 cp --no-sign-request "${BAM_URL}.bai" "$OUT/"
+
+echo "Download complete:"
+ls -lh "$OUT" | grep "$SAMPLE"

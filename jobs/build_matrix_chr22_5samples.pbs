@@ -1,0 +1,29 @@
+#!/bin/bash
+#PBS -N matrix_c22_5
+#PBS -P cy94
+#PBS -q normal
+#PBS -l ncpus=4
+#PBS -l mem=32GB
+#PBS -l walltime=08:00:00
+#PBS -l storage=scratch/cy94+gdata/xl04
+#PBS -l wd
+#PBS -j oe
+#PBS -o /scratch/cy94/rs4477/1kgp-cis-mqtl/logs/
+
+set -euo pipefail
+
+source /scratch/cy94/rs4477/1kgp-cis-mqtl-pipeline/config/gadi.env
+
+cd /scratch/cy94/rs4477/1kgp-cis-mqtl-pipeline
+
+mkdir -p /g/data/xl04/rs4477/1kgp-cis-mqtl/matrix/chr22_5samples
+
+python scripts/matrix/01_aggregate_bedmethyl.py \
+  --input-dir /g/data/xl04/rs4477/1kgp-cis-mqtl/matrix_input/chr22_5samples \
+  --pattern "*.chr22.bedmethyl.gz" \
+  --output-dir /g/data/xl04/rs4477/1kgp-cis-mqtl/matrix/chr22_5samples \
+  --min-coverage 10 \
+  --min-samples 0.8
+
+echo "Matrix build complete."
+ls -lh /g/data/xl04/rs4477/1kgp-cis-mqtl/matrix/chr22_5samples

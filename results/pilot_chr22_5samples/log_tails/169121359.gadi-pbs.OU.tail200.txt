@@ -1,0 +1,35 @@
+2026-05-24 06:07:17 [INFO] Found 5 samples
+2026-05-24 06:07:17 [INFO] Building matrix from 5 samples (min_cov=10, min_samples=80%)
+2026-05-24 06:07:17 [INFO]   Reading HG02470.chr22 ← HG02470.chr22.bedmethyl.gz
+2026-05-24 06:07:18 [INFO]   Reading HG02479.chr22 ← HG02479.chr22.bedmethyl.gz
+2026-05-24 06:07:19 [INFO]   Reading HG03027.chr22 ← HG03027.chr22.bedmethyl.gz
+2026-05-24 06:07:21 [INFO]   Reading HG03045.chr22 ← HG03045.chr22.bedmethyl.gz
+2026-05-24 06:07:22 [INFO]   Reading HG03079.chr22 ← HG03079.chr22.bedmethyl.gz
+2026-05-24 06:07:25 [INFO]   Sites before filtering: 620,696 (union across samples)
+2026-05-24 06:07:26 [INFO]   Sites after min-sample filter (4/5): 589,170
+2026-05-24 11:15:46 [INFO]   Imputed missing values with site mean
+/scratch/cy94/rs4477/1kgp-cis-mqtl-pipeline/scripts/matrix/01_aggregate_bedmethyl.py:190: Pandas4Warning: The copy keyword is deprecated and will be removed in a future version. Copy-on-Write is active in pandas since 3.0 which utilizes a lazy copy mechanism that defers copies until necessary. Use .copy() to make an eager copy if necessary.
+  out["_sort"] = out["#chr"].map(chrom_order).fillna(99).infer_objects(copy=False)
+2026-05-24 11:16:04 [INFO]   Wrote 589,170 sites × 5 samples → /g/data/xl04/rs4477/1kgp-cis-mqtl/matrix/chr22_5samples/methylation_beta.bed.gz
+/scratch/cy94/rs4477/1kgp-cis-mqtl-pipeline/scripts/matrix/01_aggregate_bedmethyl.py:190: Pandas4Warning: The copy keyword is deprecated and will be removed in a future version. Copy-on-Write is active in pandas since 3.0 which utilizes a lazy copy mechanism that defers copies until necessary. Use .copy() to make an eager copy if necessary.
+  out["_sort"] = out["#chr"].map(chrom_order).fillna(99).infer_objects(copy=False)
+2026-05-24 11:16:15 [INFO]   Wrote 589,170 sites × 5 samples → /g/data/xl04/rs4477/1kgp-cis-mqtl/matrix/chr22_5samples/methylation_Mval.bed.gz
+2026-05-24 11:16:19 [INFO] Site QC written → /g/data/xl04/rs4477/1kgp-cis-mqtl/matrix/chr22_5samples/site_qc.tsv
+2026-05-24 11:16:19 [INFO] Done.
+Matrix build complete.
+total 40M
+-rw-r--r-- 1 rs4477 xl04 11M May 24 11:16 methylation_Mval.bed.gz
+-rw-r--r-- 1 rs4477 xl04 11M May 24 11:16 methylation_beta.bed.gz
+-rw-r--r-- 1 rs4477 xl04 26M May 24 11:16 site_qc.tsv
+
+======================================================================================
+                  Resource Usage on 2026-05-24 11:16:29:
+   Job Id:             169121359.gadi-pbs
+   Project:            cy94
+   Exit Status:        0
+   Service Units:      82.58
+   NCPUs Requested:    4                   CPU Time Used: 05:08:58        
+   Memory Requested:   32.0GB                Memory Used: 3.3GB           
+   Walltime Requested: 08:00:00            Walltime Used: 05:09:40        
+   JobFS Requested:    100.0MB                JobFS Used: 0B              
+======================================================================================
