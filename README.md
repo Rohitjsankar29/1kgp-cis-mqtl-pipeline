@@ -2,10 +2,7 @@
 
 This repository contains a merged NCI/Gadi-ready pipeline for developing a reproducible CpG-centric cis-mQTL prioritisation framework.
 
-The pipeline combines:
 
-1. the guide/Cursor-agent production scripts for NCI execution, memory control and TensorQTL scaling; and
-2. the dissertation-specific downstream modules for SuSiE fine-mapping, structural variant integration, functional annotation and CpG-centric prioritisation.
 
 ## Core design
 
