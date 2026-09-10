@@ -1,0 +1,14 @@
+SMR+HEIDI: three cardiometabolic diseases (Prophecy)
+=====================================================
+Methylation-mediated loci (SMR-significant + HEIDI-passing):
+
+eGFR (kidney, CKDGen): 45 loci - NINJ1, DPEP1, MEIS1
+CAD (coronary, Aragam 2022): 22 loci - TBX20, MYL2 (cardiac), SMARCA4
+T2D (DIAMANTE EUR): 23 loci - HNF1A (MODY3!), FGFR3, ABCC5, PIM3
+
+Shared: chr5_56564909 mediates BOTH CVD + T2D (pleiotropic cardiometabolic locus).
+
+Method: SMR v1.4.2 + HEIDI; mQTL (452 1000G-ONT, ASM-corroborated candidates) vs
+disease GWAS; in-sample 452 LD; hg38 (GWAS lifted from b37). --diff-freq-prop 0.99
+(reference-cohort AF differences expected).
+Canonical disease genes recovered (HNF1A/diabetes, MYL2/TBX20/heart) validate approach.
