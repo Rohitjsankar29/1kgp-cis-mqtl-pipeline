@@ -1,0 +1,6 @@
+source("/scratch/cy94/rs4477/coloc/plot/plot_SMR.r")
+SMRData = ReadSMRData("/scratch/cy94/rs4477/coloc/plots/plot/HNF1A_t2d.chr12_120960293.txt")
+png("/scratch/cy94/rs4477/coloc/plots/HNF1A_t2d.png", width=1500, height=1300, res=160)
+SMRLocusPlot(data=SMRData, smr_thresh=8.4e-6, heidi_thresh=0.05, plotWindow=500, max_anno_probe=8)
+dev.off()
+cat("HNF1A done\n")
