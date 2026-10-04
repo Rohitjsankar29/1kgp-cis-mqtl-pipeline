@@ -1,0 +1,50 @@
+#!/bin/bash
+#PBS -N confirm1000
+#PBS -P cy94
+#PBS -q normal
+#PBS -l ncpus=12
+#PBS -l mem=48GB
+#PBS -l walltime=06:00:00
+#PBS -l jobfs=10GB
+#PBS -l storage=scratch/cy94+gdata/cy94
+#PBS -l wd
+#PBS -j oe
+#PBS -o /scratch/cy94/rs4477/logs/confirm1000.log
+# 1000-permutation CONFIRMATION scan on prioritised hits only
+# (README policy: 100-perm discovery, 1000-perm confirmation on prioritised hits).
+# CpG list: config/confirmation_cpgs.txt = best_cpg of top-1000 prioritised
+# variants + the 90 SMR+HEIDI probes (1,084 CpGs, all 22 chromosomes).
+set -uo pipefail
+export MAMBA_EXE=/home/571/rs4477/.local/bin/micromamba
+export MAMBA_ROOT_PREFIX=/scratch/cy94/rs4477/micromamba
+eval "$($MAMBA_EXE shell hook --shell bash --root-prefix $MAMBA_ROOT_PREFIX)"
+micromamba activate mqtl_tensorqtl
+
+REPO=/scratch/cy94/rs4477/1kgp-cis-mqtl-pipeline
+B=/scratch/cy94/rs4477/1kgp-cis-mqtl
+G=/g/data/cy94/rs4477/downstream/genome_452
+CPGS=$REPO/config/confirmation_cpgs.txt
+RUNNER=$REPO/scripts/cov_v2/05a_run_permutation.py
+[ -f "$RUNNER" ] || RUNNER=/scratch/cy94/rs4477/cov_v2/05a_run_permutation.py
+
+for N in $(seq 1 22); do
+  C=chr$N
+  LIST=$PBS_JOBFS/$C.cpgs
+  grep "^${C}_" $CPGS > $LIST || true
+  [ -s $LIST ] || { echo "$C: no confirmation CpGs"; continue; }
+  OUT=$G/$C/confirm; mkdir -p $OUT
+  [ -s $OUT/$C.confirm1000.done ] && { echo "$C skip (done)"; continue; }
+  echo "=== $C  $(wc -l < $LIST) CpGs  $(date +%T) ==="
+  BED=$PBS_JOBFS/$C.subset.bed
+  zcat $B/matrix/genome_452_cpgfilt/$C.methylation_Mval.cpgfilt.bed.gz \
+    | awk -v L=$LIST 'BEGIN{while((getline x < L)>0) k[x]=1} NR==1 || ($4 in k)' > $BED
+  gzip -f $BED
+  python $RUNNER \
+    --plink-prefix $B/genotypes/genome_452/$C/$C.452samples \
+    --phenotype-bed $BED.gz \
+    --covariates $B/covariates/genome_452/$C.covariates.tsv \
+    --out $OUT/$C.confirm1000.txt.gz \
+    --n-permutations 1000 --inverse-normal --threads 12 \
+    && touch $OUT/$C.confirm1000.done
+done
+echo CONFIRM_ALL_DONE

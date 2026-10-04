@@ -1,0 +1,55 @@
+#!/bin/bash
+#PBS -N lambda_chr22
+#PBS -P cy94
+#PBS -q normal
+#PBS -l ncpus=16,mem=64GB,walltime=02:00:00,jobfs=20GB
+#PBS -l storage=scratch/cy94+gdata/cy94
+#PBS -l wd
+#PBS -j oe
+#PBS -o /scratch/cy94/rs4477/logs/lambda_chr22.log
+set -uo pipefail
+export MAMBA_EXE=/home/571/rs4477/.local/bin/micromamba
+export MAMBA_ROOT_PREFIX=/scratch/cy94/rs4477/micromamba
+eval "$($MAMBA_EXE shell hook --shell bash --root-prefix $MAMBA_ROOT_PREFIX)"
+micromamba activate mqtl_tensorqtl
+
+REPO=/scratch/cy94/rs4477/1kgp-cis-mqtl-pipeline
+B=/scratch/cy94/rs4477/1kgp-cis-mqtl
+G=/g/data/cy94/rs4477/downstream/genome_452
+
+REAL_PERM=$B/tensorqtl/genome_452/combined/chr22.permutation.txt
+PHENO_BED=$B/matrix/genome_452_cpgfilt/chr22.methylation_Mval.cpgfilt.bed.gz
+COVARS=$B/covariates/genome_452/chr22.covariates.tsv
+PLINK_CHR22=/scratch/cy94/rs4477/1kgp-cis-mqtl/genotypes/genome_452/chr22/chr22.452samples
+
+OUT=$G/calibration/chr22
+mkdir -p "$OUT" /scratch/cy94/rs4477/logs
+cd "$OUT"
+
+for F in "$REAL_PERM" "$PHENO_BED" "$COVARS" "${PLINK_CHR22}.bed" "${PLINK_CHR22}.bim" "${PLINK_CHR22}.fam"; do
+    [ -f "$F" ] || { echo "MISSING: $F"; exit 1; }
+done
+echo "[$(date +%H:%M:%S)] prerequisites OK; python=$(which python)"
+
+for SEED in 11 22 33; do
+    echo "[$(date +%H:%M:%S)] NULL permutation pass, seed=$SEED"
+    python $REPO/scripts/cov_v2/05d_permuted_null.py \
+        --plink-prefix   $PLINK_CHR22 \
+        --phenotype-bed  $PHENO_BED \
+        --covariates     $COVARS \
+        --cis-window     1000000 \
+        --maf-threshold  0.05 \
+        --n-permutations 100 \
+        --n-phenotypes   10000 \
+        --shuffle-seed   $SEED \
+        --threads        8 \
+        --out            $OUT/chr22.null.seed${SEED}.txt.gz
+done
+
+python $REPO/scripts/qc/compute_lambda_chr.py \
+    --real "$REAL_PERM" \
+    --null "$OUT/chr22.null.seed*.txt.gz" \
+    --chr  22 \
+    --out  $G/calibration/calibration_chr22.txt
+
+cat $G/calibration/calibration_chr22.txt

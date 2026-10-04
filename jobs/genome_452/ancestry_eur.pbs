@@ -1,0 +1,38 @@
+#!/bin/bash
+#PBS -N ancestry_EUR
+#PBS -P cy94
+#PBS -q normal
+#PBS -l ncpus=8,mem=32GB,walltime=01:00:00,jobfs=10GB
+#PBS -l storage=scratch/cy94+gdata/cy94
+#PBS -l wd
+#PBS -j oe
+#PBS -o /scratch/cy94/rs4477/logs/ancestry_EUR.log
+set -uo pipefail
+export MAMBA_EXE=/home/571/rs4477/.local/bin/micromamba
+export MAMBA_ROOT_PREFIX=/scratch/cy94/rs4477/micromamba
+eval "$($MAMBA_EXE shell hook --shell bash --root-prefix $MAMBA_ROOT_PREFIX)"
+micromamba activate mqtl_tensorqtl
+
+REPO=/scratch/cy94/rs4477/1kgp-cis-mqtl-pipeline
+G=/g/data/cy94/rs4477/downstream/genome_452
+
+echo "[$(date +%H:%M:%S)] step 1 -- build EUR keep list"
+python $REPO/scripts/ancestry/01_make_superpop_keep.py \
+    --metadata $REPO/config/metadata_with_pop.tsv \
+    --out-dir  $G/ancestry/keep
+
+echo "[$(date +%H:%M:%S)] step 2 -- EUR PLINK panels"
+bash $REPO/scripts/ancestry/02_compute_ancestry_ld.sh EUR
+
+echo "[$(date +%H:%M:%S)] step 3 -- SMR with EUR LD"
+bash $REPO/scripts/ancestry/03_run_smr_ancestry.sh EUR
+
+echo "[$(date +%H:%M:%S)] step 4 -- ancestry-vs-multi comparison"
+micromamba activate mqtl_tensorqtl
+python $REPO/scripts/ancestry/04_compare_ancestry_vs_multi.py \
+    --pop           EUR \
+    --primary-dir   /scratch/cy94/rs4477/coloc \
+    --ancestry-dir  $G/ancestry/smr/EUR \
+    --out-dir       $G/ancestry/sensitivity
+
+cat $G/ancestry/sensitivity/ancestry_sensitivity_summary_EUR.tsv

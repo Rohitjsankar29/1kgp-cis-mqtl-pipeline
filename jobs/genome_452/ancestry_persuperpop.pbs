@@ -1,0 +1,36 @@
+#!/bin/bash
+#PBS -q normal
+#PBS -P cy94
+#PBS -N ancestry_persuperpop
+#PBS -l ncpus=8,mem=32GB,walltime=03:00:00,storage=gdata/cy94+scratch/cy94,jobfs=10GB
+#PBS -j oe
+#PBS -o /scratch/cy94/rs4477/logs/ancestry_persuperpop.log
+
+# ancestry_persuperpop.pbs (v3.1) -- STRETCH: repeat SMR sensitivity for
+# the four other superpopulations. Only submit after EUR ran cleanly.
+#
+# v3.1 fix: micromamba run wrapping for the python step.
+# Cost: ~1-2 SU per pop; 4 pops = ~5-8 SU.
+
+set -euo pipefail
+
+REPO=/scratch/cy94/rs4477/1kgp-cis-mqtl-pipeline
+G=/g/data/cy94/rs4477/downstream/genome_452
+
+for POP in SAS EAS AMR; do
+    echo "[$(date +%H:%M:%S)] ============= $POP ============="
+    bash $REPO/scripts/ancestry/02_compute_ancestry_ld.sh $POP
+    bash $REPO/scripts/ancestry/03_run_smr_ancestry.sh    $POP
+    /scratch/cy94/rs4477/micromamba/envs/mqtl_tensorqtl/bin/python \
+        $REPO/scripts/ancestry/04_compare_ancestry_vs_multi.py \
+        --pop           $POP \
+        --primary-dir   /scratch/cy94/rs4477/coloc \
+        --ancestry-dir  $G/ancestry/smr/$POP \
+        --out-dir       $G/ancestry/sensitivity
+done
+
+echo "[$(date +%H:%M:%S)] DONE -- per-superpop sensitivity complete"
+for POP in EUR AFR SAS EAS AMR; do
+    F=$G/ancestry/sensitivity/ancestry_sensitivity_summary_${POP}.tsv
+    [[ -s $F ]] && cat $F
+done
