@@ -5,7 +5,7 @@
 ```bash
 cd /scratch/cy94/$USER
 git clone https://github.com/RohitJayaSankar29/1kgp-cis-mqtl-pipeline.git
-cd 1kgp-cis-mqtl-pipeline/1kgp_cis_mqtl_pipeline
+cd 1kgp-cis-mqtl-pipeline
 nano config/gadi.env
 ```
 
