@@ -57,9 +57,6 @@ is preferred as it does not blend orthogonal axes into one weighted number.
 Imprinted loci (parent-of-origin ASM, not sequence-driven) are recovered as a positive
 control and flagged/excluded (flag_imprinted.py). Top candidates are sequence-driven.
 
-Scripts: rescore_with_asm.py, flag_imprinted.py, save_scores.py
-Results: results/genome_452/scoring_summary.txt, top500_by_convergence.tsv, top500_by_scorev2.tsv
+Scripts: rescore_with_asm.py, flag_imprinted.py
+Results: results/genome_452/top1000_prioritised_variants.tsv, top_5axis_asm_cismqtl.tsv, top_asm_corroborated_cismqtl.tsv
 
-## Prioritisation scoring (multi-evidence)
-score_convergence (0-5): independent evidence axes (PIP>0.9, ASM+, cCRE, SV, effect). ASM orthogonal to PIP (corr=0.011). e.g. DNM1: fine-mapped, ASM 82%, 5-axis.
-score_v2: weighted, ASM co-equal PIP. Secondary. Imprinting flagged/excluded (control). Scripts: rescore_with_asm.py, flag_imprinted.py

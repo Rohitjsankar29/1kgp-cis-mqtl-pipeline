@@ -1,0 +1,41 @@
+#!/bin/bash
+#PBS -N null_gw
+#PBS -P cy94
+#PBS -q gpuvolta
+#PBS -l ngpus=1
+#PBS -l ncpus=12
+#PBS -l mem=90GB
+#PBS -l walltime=02:00:00
+#PBS -l storage=scratch/cy94+gdata/cy94
+#PBS -l wd
+#PBS -j oe
+#PBS -r y
+#PBS -J 1-22%5
+#PBS -o /scratch/cy94/rs4477/logs/null_gw_^array_index^.log
+set -uo pipefail
+
+CHR=$PBS_ARRAY_INDEX
+ENV=/scratch/cy94/rs4477/micromamba/envs/mqtl_tensorqtl
+export MPLCONFIGDIR=/scratch/cy94/rs4477/tmp/mpl
+PY=$ENV/bin/python3
+SC=/scratch/cy94/rs4477/cov_v2
+BASE=/scratch/cy94/rs4477/1kgp-cis-mqtl
+OUT=/g/data/cy94/rs4477/downstream/genome_452/calibration/null_gw; mkdir -p "$OUT"
+
+PLINK="$BASE/genotypes/genome_452/chr${CHR}/chr${CHR}.452samples"
+PHENO="$BASE/matrix/genome_452_cpgfilt/chr${CHR}.methylation_Mval.cpgfilt.bed.gz"
+COVAR="$BASE/covariates/genome_452/chr${CHR}.covariates.tsv"
+
+echo "=== chr${CHR} genome-wide null ==="
+for f in "$PLINK.bed" "$PHENO" "$COVAR"; do
+  [ -f "$f" ] || { echo "MISSING: $f"; exit 1; }
+done
+
+$PY "$SC/05d_permuted_null.py" \
+  --plink-prefix "$PLINK" \
+  --phenotype-bed "$PHENO" \
+  --covariates "$COVAR" \
+  --out "$OUT/chr${CHR}.null.perm.txt.gz" \
+  --cis-window 1000000 --maf-threshold 0.05 \
+  --n-permutations 100 --n-phenotypes 10000 --inverse-normal --threads 12
+echo "chr${CHR} exit: $?"; ls -la "$OUT/chr${CHR}.null.perm.txt.gz"
