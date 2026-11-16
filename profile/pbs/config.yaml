@@ -1,0 +1,17 @@
+# Snakemake 9 PBS profile for Gadi (NCI).
+# Use:  snakemake --profile profile/pbs            (submits each rule as a qsub job)
+# Needs: micromamba install -n smk -c bioconda -c conda-forge \
+#          snakemake-executor-plugin-cluster-generic
+executor: cluster-generic
+cluster-generic-submit-cmd: "bash profile/pbs/qsub.sh {resources.queue} {resources.ncpus} {resources.mem_mb} {resources.walltime} {resources.gpu} {rule}"
+cluster-generic-status-cmd: "bash profile/pbs/qstat-status.sh"
+default-resources:
+  queue: "normal"
+  ncpus: 4
+  mem: "16GB"
+  walltime: "02:00:00"
+  gpu: 0
+jobs: 20                 # max concurrent qsub jobs
+latency-wait: 60         # seconds to wait for shared-FS files to appear
+restart-times: 0
+printshellcmds: true

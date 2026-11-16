@@ -1,0 +1,23 @@
+
+# ---- mqtl_nominal stage (from run_nominal_gw.pbs) ----
+mqtl_in:    /scratch/cy94/rs4477/1kgp-cis-mqtl
+downstream: /g/data/cy94/rs4477/downstream/genome_452
+env:
+  mamba_exe:     /home/571/rs4477/.local/bin/micromamba
+  mamba_root:    /scratch/cy94/rs4477/micromamba
+  tensorqtl_env: mqtl_tensorqtl
+params:
+  cis_window:    1000000
+  maf_threshold: 0.05
+
+# ---- downstream stages ----
+repo:         /scratch/cy94/rs4477/1kgp-cis-mqtl-pipeline
+scripts_cov2: /scratch/cy94/rs4477/cov_v2
+annotation:   /scratch/cy94/rs4477/reference/annotation
+coloc_dir:    /scratch/cy94/rs4477/coloc
+
+# ---- downstream stages ----
+repo:         /scratch/cy94/rs4477/1kgp-cis-mqtl-pipeline
+scripts_cov2: /scratch/cy94/rs4477/cov_v2
+annotation:   /scratch/cy94/rs4477/reference/annotation
+coloc_dir:    /scratch/cy94/rs4477/coloc

@@ -18,3 +18,4 @@ methylation/
 *permutation_all.tsv
 *.pyc
 __pycache__/
+.snakemake/
